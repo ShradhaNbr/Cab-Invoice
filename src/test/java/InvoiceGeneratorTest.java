@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -6,6 +7,10 @@ import org.junit.jupiter.api.Test;
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         private Assertions Assert;
 
+        @Before
+        public void setUp() throws Exception {
+            invoiceGenerator = new InvoiceGenerator();
+        }
         @Test
         public void whenGivenDistanceAndTimeShouldReturnTotalFare() {
             double distance = 2.0;
@@ -38,5 +43,15 @@ import org.junit.jupiter.api.Test;
             InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
             InvoiceSummary expectedSummary = new InvoiceSummary(2,30);
             Assert.assertEquals(summary, expectedSummary);
+        }
+        @Test
+        public void givenUseridShouldReturnUserInvoice() {
+            String id = "Shradha";
+            Ride[] rides = {new Ride(2.0,5),
+                             new Ride(0.1,1)};
+            invoiceGenerator.addRides(id,rides);
+            InvoiceSummary summary = new InvoiceSummary(2,30);
+            InvoiceSummary expectedSummary = invoiceGenerator.getInvoiceSummary(id);
+            Assert.assertEquals(summary,expectedSummary);
         }
     }
