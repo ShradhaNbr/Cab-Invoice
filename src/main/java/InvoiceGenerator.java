@@ -7,6 +7,9 @@ public class InvoiceGenerator {
     public InvoiceGenerator() {
         this.rideRepository = new RideRepository();
     }
+    public void setRideRepository(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
 
 /*
  * Purpose : Method to calculate fare
@@ -30,7 +33,7 @@ public class InvoiceGenerator {
     }
 
     //method to get number of rides
-    public int getNumberOfRides(Ride[] rides) {
+   public int getNumberOfRides(Ride[] rides) {
         return rides.length;
     }
 
@@ -52,13 +55,21 @@ public class InvoiceGenerator {
         }
         return new InvoiceSummary(rides.length, totalFare);
     }
-
+    //Creating calculateFare method
+    public InvoiceSummary getTotalFare(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides) {
+            //calling calculateFare method here
+            totalFare += ride.cabRide.calculateFareperRide(ride);
+        }
+        return new InvoiceSummary(rides.length, totalFare);
+    }
     //Method to add rides
     public void addRides(String id,Ride[] rides) {
         rideRepository.addRides(id,rides);
     }
 
     public InvoiceSummary getInvoiceSummary(String id) {
-        return this.calculateFare(rideRepository.getRide(id));
+        return this.getTotalFare(rideRepository.getRide(id));
     }
 }

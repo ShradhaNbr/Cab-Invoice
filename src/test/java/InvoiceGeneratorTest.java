@@ -30,16 +30,16 @@ import org.junit.jupiter.api.Test;
         @Test
         public void whenGivenMultipleRidesShouldReturnTotalFare() {
             //Creating rides object for Rides class
-            Ride[] rides = {new Ride(2.0, 5),
-                    new Ride(0.1, 1)};
+            Ride[] rides = {new Ride(CabRide.Normal, 2.0, 5),
+                    new Ride(CabRide.Normal, 0.1, 1)};
             //calling calculateTotalFare method
             double totalFare = invoiceGenerator.calculateTotalFare(rides);
             Assert.assertEquals(30, totalFare, 0.0);
         }
         @Test
         public void whenGiveMultipleRidesShouldReturnInvoiceSummary() {
-            Ride[] rides = {new Ride(2.0,5),
-                                new Ride(0.1,1) } ;
+            Ride[] rides = {new Ride(CabRide.Normal, 2.0, 5),
+                                new Ride(CabRide.Normal, 0.1, 1) } ;
             InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
             InvoiceSummary expectedSummary = new InvoiceSummary(2,30);
             Assert.assertEquals(summary, expectedSummary);
@@ -47,11 +47,24 @@ import org.junit.jupiter.api.Test;
         @Test
         public void givenUseridShouldReturnUserInvoice() {
             String id = "Shradha";
-            Ride[] rides = {new Ride(2.0,5),
-                             new Ride(0.1,1)};
+            Ride[] rides = {new Ride(CabRide.Normal, 2.0, 5),
+                             new Ride(CabRide.Normal, 0.1, 1)};
             invoiceGenerator.addRides(id,rides);
             InvoiceSummary summary = new InvoiceSummary(2,30);
             InvoiceSummary expectedSummary = invoiceGenerator.getInvoiceSummary(id);
             Assert.assertEquals(summary,expectedSummary);
+        }
+        @Test
+        public void  givenPremiumAndNormalRideForUserIdShouldReturnInvoiceSummary() {
+            String id = "Shradha123";
+            RideRepository  rideRepository = new RideRepository();
+            invoiceGenerator.setRideRepository(rideRepository);
+            Ride[] rides = new Ride[]{
+                    new Ride(CabRide.Normal, 2.0, 5),
+                    new Ride(CabRide.Premium, 0.1, 1)};
+            invoiceGenerator.addRides(id, rides);
+            InvoiceSummary summary = invoiceGenerator.getInvoiceSummary(id);
+            InvoiceSummary expectedInvoice = new InvoiceSummary(2,45.0);
+            Assert.assertEquals(summary, expectedInvoice);
         }
     }

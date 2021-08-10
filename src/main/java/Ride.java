@@ -1,15 +1,23 @@
 public class Ride {
 
-        private final int time;
-        private double distance ;
+    private final int time;
+    public CabRide cabRide;
+    private double distance ;
 
         //Creating Constructor
-        public Ride(double distance, int time) {
+        public Ride(double distance, int time, CabRide cabRide) {
             this.distance = distance;
             this.time = time;
+            this.cabRide = cabRide;
         }
 
-        public int getTime() {
+    public Ride(CabRide ride, double distance, int time) {
+            this.distance = distance;
+            this.time = time;
+            this.cabRide  = ride;
+    }
+
+    public int getTime() {
             return time;
         }
 
