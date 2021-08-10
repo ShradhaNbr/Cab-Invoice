@@ -36,5 +36,27 @@ import org.junit.jupiter.api.Test;
             System.out.println("Total Fare = "+totalFare);
             Assert.assertEquals(30, totalFare,0.0);
         }
+        @Test
+        public void WhenGivenMultipleRidesShouldReturnSizeAndAverageFare() {
+            //Creating object for InvoiceGenerator class
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            //Creating rides object for Rides class taking Multiple rides
+            Ride[] rides = { new Ride(30,4),
+                    new Ride(20.0,1),
+                    new Ride(55.0,1),
+                    new Ride(22.5,1)};
+            //calling calculateTotalFare method
+            double totalFare = invoiceGenerator.calculateTotalFare(rides);
+            int numberOfRides = invoiceGenerator.getNumberOfRides(rides);
+            double averageTotalFare = invoiceGenerator.calculateAverageFarePerRide(rides);
+            //printing the totalFare,numberOfRides,averageTotalFare
+            System.out.println("Total Fare = " +totalFare);
+            System.out.println("Number of ride = " +numberOfRides);
+            System.out.println("Average Total Fare " +averageTotalFare);
+
+            Assert.assertEquals(1282,totalFare,0.0);
+            Assert.assertEquals(4,numberOfRides);
+            Assert.assertEquals(320.5,averageTotalFare,0.5);
+        }
     }
 

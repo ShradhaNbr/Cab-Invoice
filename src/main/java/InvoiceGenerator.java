@@ -23,4 +23,19 @@ public class InvoiceGenerator {
         }
         return totalFare;
     }
+
+    //method to get number of rides
+    public int getNumberOfRides(Ride[] rides) {
+        return rides.length;
+    }
+
+    //Method to calculate AverageFarePerRide
+    public double calculateAverageFarePerRide(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides) {
+            //calling calculateFare method here
+            totalFare += calculateFare(ride.getDistance(), ride.getTime());
+        }
+        return totalFare / rides.length;
+    }
 }

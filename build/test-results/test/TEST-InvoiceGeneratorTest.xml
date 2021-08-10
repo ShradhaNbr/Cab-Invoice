@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="InvoiceGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-10T01:11:25" hostname="SHRADHA" time="0.04">
+<testsuite name="InvoiceGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-10T01:23:25" hostname="SHRADHA" time="0.025">
   <properties/>
-  <testcase name="whenGivenMultipleRidesShouldReturnTotalFare()" classname="InvoiceGeneratorTest" time="0.04"/>
-  <system-out><![CDATA[Total Fare = 30.0
-]]></system-out>
+  <testcase name="WhenGivenLessDistanceAndTimeShouldReturnMinimumFare()" classname="InvoiceGeneratorTest" time="0.025"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
